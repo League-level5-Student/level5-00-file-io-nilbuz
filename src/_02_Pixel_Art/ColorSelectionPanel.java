@@ -38,18 +38,17 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 	private int g = 0;
 	private int b = 0;
 
-	private static String fileName = "";
-
 	private JLabel colorLabel;
 	private BufferedImage colorImage;
 	private JButton saveButton;
+	private JButton loadButton;
 
+	PixelArtMaker pam = new PixelArtMaker();
+	
 	public ColorSelectionPanel() {
 		rSlider = new JSlider(JSlider.VERTICAL);
 		gSlider = new JSlider(JSlider.VERTICAL);
 		bSlider = new JSlider(JSlider.VERTICAL);
-
-		fileName = "src/_02_Pixel_Art/art.dat";
 
 		rSlider.setMinimum(0);
 		rSlider.setMaximum(MAX_COLOR - 1);
@@ -67,6 +66,10 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 
 		addMouseListener(this);
 
+		loadButton = new JButton();
+		loadButton.setText("Load art");
+		loadButton.addActionListener(this);
+		
 		saveButton = new JButton();
 		saveButton.setText("Save art");
 		saveButton.addActionListener(this);
@@ -90,6 +93,7 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 		add(new JLabel("blue"));
 		add(bSlider);
 		add(saveButton);
+		add(loadButton);
 	}
 
 	public Color getSelectedColor() {
@@ -147,32 +151,13 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == saveButton) {
-			//save();
+			pam.save();
 		}
 
+		if (e.getSource() == loadButton) {
+			pam.load();
+		}
+		
 	}
 
-	private void save(GridPanel art) {
-		try (FileOutputStream fos = new FileOutputStream(new File(fileName));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(art);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private GridPanel load() {
-		try (FileInputStream fis = new FileInputStream(new File(fileName));
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			return (GridPanel) ois.readObject();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
-			// This can occur if the object we read from the file is not
-			// an instance of any recognized class
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

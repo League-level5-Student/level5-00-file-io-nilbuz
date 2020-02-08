@@ -86,8 +86,8 @@ public class GridPanel extends JPanel implements Serializable{
 
 				g.setColor(array[i][j].color);
 				g.fillRect(array[i][j].x, array[i][j].y, pixelWidth, pixelHeight);
-				g.setColor(Color.BLACK);
-				g.drawRect(array[i][j].x, array[i][j].y, pixelWidth, pixelHeight);
+				//g.setColor(Color.BLACK);
+				//g.drawRect(array[i][j].x, array[i][j].y, pixelWidth, pixelHeight);
 
 			}
 		}
