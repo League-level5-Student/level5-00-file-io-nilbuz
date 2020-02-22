@@ -35,6 +35,10 @@ public class GridInputPanel extends JPanel{
 		add(colsField);
 		add(submitButton);
 		
+		windowWidthField.setText("500");
+		windowHeightField.setText("500");
+		rowsField.setText("50");
+		colsField.setText("50");
 		submitButton.addActionListener((e)->submit());
 	}
 	

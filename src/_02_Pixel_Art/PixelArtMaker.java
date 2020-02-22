@@ -33,7 +33,7 @@ public class PixelArtMaker implements MouseListener {
 
 	public void submitGridData(int w, int h, int r, int c) {
 
-		csp = new ColorSelectionPanel();
+		csp = new ColorSelectionPanel(this);
 		gp = new GridPanel(w,h,r,c);
 		window.remove(gip);
 		window.add(gp);
@@ -56,13 +56,19 @@ public class PixelArtMaker implements MouseListener {
 	public void load() {
 		try (FileInputStream fis = new FileInputStream(new File("src/_02_Pixel_Art/art.dat"));
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			gp = (GridPanel) ois.readObject();
-			JFrame window2 = new JFrame();
 			
-			window2.add(gp);
-			window2.pack();
-			window2.setVisible(true);
+			GridPanel tempgp = gp;
+			gp = (GridPanel) ois.readObject();
+			
+//			JFrame window2 = new JFrame();
+//			window2.add(gp);
+//			window2.pack();
+//			window2.setVisible(true);
+			
+			window.remove(gp);
+			window.add(gp);
 			gp.repaint();
+			
 			System.out.println("loaded");
 		} catch (IOException e) {
 			e.printStackTrace();

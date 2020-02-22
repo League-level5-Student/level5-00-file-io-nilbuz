@@ -43,9 +43,12 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 	private JButton saveButton;
 	private JButton loadButton;
 
-	PixelArtMaker pam = new PixelArtMaker();
+	PixelArtMaker pam;
 	
-	public ColorSelectionPanel() {
+	public ColorSelectionPanel(PixelArtMaker pam) {
+		
+		this.pam = pam;
+		
 		rSlider = new JSlider(JSlider.VERTICAL);
 		gSlider = new JSlider(JSlider.VERTICAL);
 		bSlider = new JSlider(JSlider.VERTICAL);
